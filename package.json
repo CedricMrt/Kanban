@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "npm run dev:back & npm run dev:front",
+    "dev": "npm run dev:front & npm run dev:back",
     "dev:front": "npm run dev --prefix client",
     "dev:back": "node --watch index.js",
     "db:create": "node ./src/migrations/01.createTables.js",
