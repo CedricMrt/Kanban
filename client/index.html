@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A Kanban." />
+    <title>oKanban</title>
+    <link
+      rel="shortcut icon"
+      href="./src/assets/favicon.ico"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="./src/assets/css/style.scss" />
+  </head>
+  <body>
+    <header>
+      <h1 class="title is-1 my-5">oKanban</h1>
+    </header>
+
+    <main class="flex-container">
+      <div id="lists-container" class="flex-container"></div>
+
+      <!-- Add a list button -->
+      <section class="message">
+        <div class="message-header">
+          <div>Ajouter une liste</div>
+        </div>
+        <div class="message-body">
+          <button
+            class="button is-large is-fullwidth"
+            id="addList"
+            aria-label="add"
+          >
+            <i class="fas fa-plus"></i>
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- #############  modal for list ########### -->
+
+    <!-- Add a list modal -->
+
+    <div class="modal" id="add-list-modal">
+      <div class="modal-background close"></div>
+      <div class="modal-card">
+        <form id="addListForm">
+          <div class="modal-card-head">
+            <p class="modal-card-title">Ajouter une liste</p>
+            <button
+              class="delete close"
+              type="button"
+              aria-label="close"
+            ></button>
+          </div>
+          <div class="modal-card-body">
+            <label class="label">Nom</label>
+            <input
+              class="input"
+              type="text"
+              name="title"
+              placeholder="Nom de la liste"
+            />
+          </div>
+
+          <div class="modal-card-foot">
+            <button class="button is-success">Ajouter</button>
+            <button class="button close" type="button">Annuler</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- update list modal -->
+    <div class="modal" id="update-list-modal">
+      <div class="modal-background close"></div>
+      <div class="modal-card">
+        <form id="updateListForm">
+          <div class="modal-card-head">
+            <p class="modal-card-title">modifier une liste</p>
+            <button
+              class="delete close"
+              type="button"
+              aria-label="close"
+            ></button>
+          </div>
+          <div class="modal-card-body">
+            <input class="input is-hidden" type="text" name="id" />
+            <label class="label">Nom</label>
+            <input
+              class="input"
+              type="text"
+              name="title"
+              placeholder="Nouveau nom de la liste"
+            />
+          </div>
+
+          <div class="modal-card-foot">
+            <button class="button is-success">Ajouter</button>
+            <button class="button close" type="button">Annuler</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- delete list modal -->
+    <div class="modal" id="delete-list-modal">
+      <div class="modal-background close"></div>
+      <div class="modal-card">
+        <form id="deleteListForm">
+          <div class="modal-card-head">
+            <p class="modal-card-title">confirmation avant suppression</p>
+            <button
+              class="delete close"
+              type="button"
+              aria-label="close"
+            ></button>
+          </div>
+          <div class="modal-card-body">
+            <input class="input is-hidden" type="text" name="id" />
+            <p>Êtes vous sur de voulour supprimer la liste ?</p>
+          </div>
+          <div class="modal-card-foot">
+            <button class="button is-success">Confirmer</button>
+            <button class="button close" type="button">Annuler</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- #############  modal for card ########### -->
+
+    <div class="modal" id="add-card-modal">
+      <div class="modal-background close"></div>
+      <div class="modal-card">
+        <form id="addCardForm">
+          <div class="modal-card-head">
+            <p class="modal-card-title">Ajouter une carte</p>
+            <button
+              class="delete close"
+              type="button"
+              aria-label="close"
+            ></button>
+          </div>
+          <div class="modal-card-body">
+            <input
+              class="input is-hidden"
+              type="text"
+              name="list_id"
+              value=""
+            />
+            <label class="label">Déscription</label>
+            <input
+              class="input"
+              type="text"
+              name="content"
+              placeholder="Contenue de la carte"
+              required
+            />
+            <label class="label mt-1">Choisissez la couleur</label>
+            <hex-color-picker color="#252525"></hex-color-picker>
+          </div>
+
+          <div class="modal-card-foot">
+            <button class="button is-success">Ajouter</button>
+            <button class="button close" type="button">Annuler</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- update card modal -->
+    <div class="modal" id="update-card-modal">
+      <div class="modal-background close"></div>
+      <div class="modal-card">
+        <form id="updateCardForm">
+          <div class="modal-card-head">
+            <p class="modal-card-title">modifier une carte</p>
+            <button
+              class="delete close"
+              type="button"
+              aria-label="close"
+            ></button>
+          </div>
+          <div class="modal-card-body">
+            <input class="input is-hidden" type="text" name="id" />
+            <label class="label">Contenu</label>
+            <input
+              class="input"
+              type="text"
+              name="content"
+              placeholder="Nouveau contenu de la carte"
+              required
+            />
+            <label class="label mt-1">Choisissez la couleur</label>
+            <hex-color-picker
+              color="#252525"
+              id="color-picker-card"
+            ></hex-color-picker>
+          </div>
+
+          <div class="modal-card-foot">
+            <button class="button is-success">Ajouter</button>
+            <button class="button close" type="button">Annuler</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- delete card modal -->
+    <div class="modal" id="delete-card-modal">
+      <div class="modal-background close"></div>
+      <div class="modal-card">
+        <form id="deleteCardForm">
+          <div class="modal-card-head">
+            <p class="modal-card-title">confirmation avant suppression</p>
+            <button
+              class="delete close"
+              type="button"
+              aria-label="close"
+            ></button>
+          </div>
+          <div class="modal-card-body">
+            <input class="input is-hidden" type="text" name="id" />
+            <p>Êtes vous sur de voulour supprimer la carte ?</p>
+          </div>
+          <div class="modal-card-foot">
+            <button class="button is-success">Confirmer</button>
+            <button class="button close" type="button">Annuler</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- #############  modal for label ########### -->
+
+    <div class="modal" id="add-label-modal">
+      <div class="modal-background close"></div>
+      <div class="modal-card">
+        <div class="modal-card-head">
+          <p class="modal-card-title">Ajouter un label</p>
+          <button
+            class="delete close"
+            type="button"
+            aria-label="close"
+          ></button>
+        </div>
+        <form id="add-label-form">
+          <div class="select">
+            <select id="label-select"></select>
+          </div>
+          <button id="add-label-button" class="button is-success">
+            Ajouter
+          </button>
+        </form>
+        <form id="create-label-form">
+          <div class="modal-card-body">
+            <input
+              class="input is-hidden"
+              type="text"
+              name="card_id"
+              value=""
+            />
+            <label class="label">Nom</label>
+            <input
+              class="input"
+              type="text"
+              name="name"
+              placeholder="Contenue du label"
+              required
+            />
+            <label class="label mt-1">Choisissez la couleur</label>
+            <hex-color-picker
+              color="#252525"
+              id="color-picker-label"
+            ></hex-color-picker>
+          </div>
+
+          <div class="modal-card-foot">
+            <button class="button is-success">Ajouter</button>
+            <button class="button close" type="button">Annuler</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script type="module" src="./src/assets/js/index.js"></script>
+
+    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+  </body>
+
+  <!-- Template pour une liste -->
+
+  <template id="list-template">
+    <section class="message is-info" slot="list-id">
+      <div class="message-header">
+        <div id="list-title"></div>
+        <div class="icons">
+          <span class="icon is-clickable updateList"
+            ><i class="fas fa-pencil-alt"></i
+          ></span>
+          <span class="icon is-clickable addCard" id="addCard"
+            ><i class="fas fa-plus"></i
+          ></span>
+          <span class="icon is-clickable deleteList"
+            ><i class="fas fa-trash"></i
+          ></span>
+        </div>
+      </div>
+      <div class="message-body card-container" id=""></div>
+    </section>
+  </template>
+
+  <!-- Template pour une carte -->
+
+  <template id="cardTemplate">
+    <article class="card" slot="card-id">
+      <div class="card-header">
+        <div
+          class="card-header-title has-text-weight-medium"
+          id="card-content"
+        ></div>
+        <div class="card-header-icon">
+          <span class="icon has-text-success updateCard"
+            ><i class="fas fa-pencil-alt"></i
+          ></span>
+          <span class="icon is-clickable addLabel"
+            ><i class="fas fa-plus"></i
+          ></span>
+          <span class="icon has-text-danger ml-2 deleteCard"
+            ><i class="fas fa-trash-alt"></i
+          ></span>
+        </div>
+      </div>
+      <div class="card-body"></div>
+    </article>
+  </template>
+</html>

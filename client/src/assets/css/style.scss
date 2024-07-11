@@ -1,0 +1,38 @@
+@import 'bulma/bulma';
+
+body {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  column-gap: 1.5rem;
+}
+
+section {
+  width: 320px;
+  margin-bottom: 1.5rem;
+}
+
+.card-body {
+  display: flex;
+}
+
+.tag {
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  text-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+@media (max-width: 600px) {
+  section {
+    width: 100%;
+  }
+}
+
+article:not(:last-child) {
+  margin-bottom: 20px;
+}

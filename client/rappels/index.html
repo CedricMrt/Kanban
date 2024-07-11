@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <!-- defer permet d'attendre tous le html soit charger avant d'exécuter le code du script -->
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <button id="buttonToggleSearchForm">Afficher le formulaire de recherche</button>
+    <form class="hidden" id="searchForm">
+      <input type="search" name="searchText" />
+      <button type="submit">Rechercher</button>
+    </form>
+    <ul id="cities"></ul>
+  </body>
+</html>
