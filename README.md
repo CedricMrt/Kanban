@@ -3,7 +3,7 @@
 ## un aperçu du rendu
 # <a href="url"><img src="https://github.com/CedricMrt/CedricMrt.github.io/blob/main/img/kanban.webp"></a>
 
-## Install From Package.json backend
+## Install depuis le Package.json backend
 * `npm i`
 
 ## Fichier environemment
